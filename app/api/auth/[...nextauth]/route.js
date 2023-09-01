@@ -4,14 +4,19 @@ import GoogleProvider from 'next-auth/providers/google';
 const handler = NextAuth({
     providers : [
         GoogleProvider({
-            clientId : '',
-            clientsecret : '' 
+            clientId : process.env.GOOGLE_CLIENT_ID,
+            clientsecret : process.env.GOOGLE_CLIENT_SECRET 
         })
     ],
     async session({session}){
         
     },
     async signIn({ profile}){
+        try{
+
+        }catch(error){
+
+        }
         
     }
 })
