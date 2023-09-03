@@ -5,16 +5,17 @@ import {useState, useEffect} from 'react';
 import {signIn, signOut, useSession, getProviders} from 'next-auth/react';
 
 const Nav = () => {
-  const isLoggedIn = false;
+  const {data:session} = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown , setToggleDropdown] =useState(false);
 
   //Allow us to sign in using google and next-auth
   useEffect(() =>{
-    const setProviders = async ()=>{
+    const setUpProviders = async ()=>{
       const response = await getProviders();
+      setProviders(response);
     }
-    setProviders();
+    setUpProviders();
   }
   ,[]);
 
@@ -29,17 +30,18 @@ const Nav = () => {
         />
         <p className='logo_text'>Promptex</p>
       </Link>
+
       <div className='sm:flex hidden'>
-        {isLoggedIn ? (
+        { session?.user ? (
           <div className='flex gap-3 md:gap-5'>
-            <Link href='/create_prompt' className='black_btn'>
+            <Link href='/create-prompt' className='black_btn'>
               Create Prompt
             </Link>
             <button type= 'button' className='outline_btn' onClick={signOut}>
               Sign Out
             </button>
             <Link href='/profile'>
-              <Image src='/assets/images/logo.svg' height={37} width={37} className='rounded-full'></Image>
+              <Image src={session?.user.image} height={37} width={37} className='rounded-full'></Image>
             </Link>
           </div>
         ):(
@@ -62,11 +64,11 @@ const Nav = () => {
 
       {/*Mobile Navigation */ }
       <div className='sm:hidden flex relative'>
-        {isLoggedIn ?(
+        {session?.user  ?(
           <div className='flex'>
             <Image 
             className='object-contain'
-            src="/assets/images/logo.svg" 
+            src={session?.user.image}
             alt='promptex logo'
             height={30}
             width={30}
