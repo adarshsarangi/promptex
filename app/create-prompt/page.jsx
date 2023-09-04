@@ -8,10 +8,16 @@ import Form from '@components/Form';
 const CreatePrompt = () => {
     const [submitting, setSubmitting] = useState(false);
     const [post, setPost] = useState({prompt:'', tag:''});
+    const createPrompt = async (e) =>{
 
+    }
   return (
     <Form
-
+      type='Create'
+      submitting={submitting}
+      post={post}
+      setPost={setPost}
+      handleSubmit = {createPrompt}
     />
   )
 }
