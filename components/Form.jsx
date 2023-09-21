@@ -11,8 +11,6 @@ const Form = ({type, post, setPost, submitting , handleSubmit}) => {
       onSubmit={handleSubmit}
       className='mt-10 wt-full max-w-2xl flex flex-col gap-7 glassmorphism'
       >
-
-        
         <label><span className='font-satoshi font-semibold text-base text-gray-700'>Your AI prompt</span></label>
         <textarea
           value = {post.prompt}
